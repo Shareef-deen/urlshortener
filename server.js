@@ -58,6 +58,15 @@ res.json({original_url: data.url, short_url: data.id})
 console.log("something",something);
 });
 
+app.get('/api/shorturl/:id',(req, res)=>{
+const id = req.params.id;
+Url.findById(id, (err, data)=>{
+  if(!data){res.json({err: "invalid url"});}
+  else{
+    res.redirect(data.url);
+  }
+})
+})
 
 
 app.listen(port, function() {
